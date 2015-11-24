@@ -33,7 +33,7 @@ $timestamp = array_merge($log_output1[1], $log_output2[1], $log_output3[1]);
 $user = array_merge($log_output1[2], $log_output2[2], $log_output3[2]);
 $msg = array_merge($log_output1[3], $log_output2[3], $log_output3[3]);
 
-$irc_log =array_push($timestamp, $user,$msg);
+$irc_log =array($timestamp, $user,$msg);
 
 print_r($irc_log);
 
