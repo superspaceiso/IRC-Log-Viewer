@@ -1,15 +1,15 @@
 <?php include ('includes/header.php'); ?>
 
- <?php
-    $url=$_SERVER['REQUEST_URI'];
-    preg_match("/([a-zA-Z]+)_([0-9]+).log/", $url, $mod_url);
-    	$correct_date = strtotime($mod_url[2]);
-    echo '<h1>Log: ', $mod_url[1], ' ', date('d/m/Y', $correct_date) ,'</h1>';
+<?php
+$url=$_SERVER['REQUEST_URI'];
+preg_match("/([a-zA-Z]+)_([0-9]+).log/", $url, $mod_url);
+$correct_date = strtotime($mod_url[2]);
+echo '<h1>Log: ', $mod_url[1], ' ', date('d/m/Y', $correct_date) ,'</h1>';
 ?>
 
- <div id="content">
+<div id="content">
 
- <?php
+<?php
 
 //path to logs
 $file_path='./logs/';
@@ -31,7 +31,7 @@ echo "<table border='0'id='log_table'>","<tr>","<th id='timestamp'>Time Stamp</t
 //$log_text[2](user)
 //$log_text[3](message)
 foreach ($log_output as $log_text) {
-	 echo "<tr>";	
+    echo "<tr>";	
     echo "<td class=\"timestamp\">" . $log_text[1] . "</td>";
     echo "<td class=\"username\">" . $log_text[2] . ": </td>";
     echo "<td>" . $log_text[3] . "</td>";

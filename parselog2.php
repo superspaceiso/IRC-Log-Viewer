@@ -1,4 +1,4 @@
- <?php
+<?php
 
 //path to logs
 $file_path='./logs/2015-08-02.log';
