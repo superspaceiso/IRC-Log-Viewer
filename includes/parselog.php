@@ -3,7 +3,7 @@
 //path to logs
 $file_path='./logs/';
 //get file name from url
-$log_location = $_GET['log'];
+$log_location = $_GET['l'];
 //combine path and url
 $log_file=file_get_contents($file_path.$log_location);
 
@@ -34,15 +34,15 @@ $messasge = array_merge($log_output1[3], $log_output2[3], $log_output3[3]);
 
 $messages = array_map(null, $timestamp,$user,$messasge);
 
-echo "<table>";
-echo "<tr><th></th><th></th><th></th></tr>";
+echo "<table border=\"0\" id=\"log_table\">";
+echo "<tr><th>Timestamp</th><th>User</th><th>Message</th></tr>";
 
 foreach ($messages as $line) {
   $ts = $line[0];
   $usr = $line[1];
   $msg = $line[2];
 
-  echo "<tr><td>",$ts,"</td><td>",$usr,"</td><td>",$msg,"</td>";
+  echo "<tr><td>",$ts,"</td><td>",$usr,"</td><td>",$msg,"</td></tr>";
 }
 
 echo "</table>";

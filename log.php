@@ -1,8 +1,10 @@
 <?php include ('includes/header.php'); ?>
 
+<?php include './includes/logtitle.php'?>
+
 <div id="content">
 
-<?php include './includes/listlogs.php'?>
+<?php include './includes/parselog.php'?>
 
 </div>
 

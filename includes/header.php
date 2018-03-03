@@ -9,7 +9,5 @@
 <div id="page_container">
 
 <div id="page_nav">
-	<ul>
-		<li><a href="index.php">Home</a></li>
-	</ul>
+		<a href="index.php">Home</a>
 </div>
