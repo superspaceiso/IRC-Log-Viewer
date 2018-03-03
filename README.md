@@ -1,2 +1,2 @@
 # IRC Log Viewer
-This is part of a project of mine to parse IRC log files from my BNC, there are several problems with it the main one being its a huge ass mess and the scripts need refining.
+This was part of a project to read the .log files from my IRC bouncer, sadly the IRC network I was part of has since died due to the use of Telegram and Discord rendering this project a bit useless but as of late I felt I should go back and try and refine it some more.
