@@ -1,11 +1,11 @@
  <?php
 
 //path to logs
-$file_path='./logs/2015-08-02.log';
+$file_path='./logs/';
 //get file name from url
-//$log_location = $_GET['log'];
-//combine path and url 
-$log_file=file_get_contents($file_path);
+$log_location = $_GET['log'];
+//combine path and url
+$log_file=file_get_contents($file_path.$log_location);
 
 //regex for capturing in channel status change (name changes or parts)
 $param1 = '/\\[(.*)\\] (\\*{3}) (.*)/';
@@ -28,13 +28,23 @@ preg_match_all($param3, $log_file, $log_output3, PREG_PATTERN_ORDER,$offset = 0)
 unset($log_output3[0]);
 //print_r($log_output3);
 
-
 $timestamp = array_merge($log_output1[1], $log_output2[1], $log_output3[1]);
 $user = array_merge($log_output1[2], $log_output2[2], $log_output3[2]);
-$msg = array_merge($log_output1[3], $log_output2[3], $log_output3[3]);
+$messasge = array_merge($log_output1[3], $log_output2[3], $log_output3[3]);
 
-$irc_log =array($timestamp, $user,$msg);
+$messages = array_map(null, $timestamp,$user,$messasge);
 
-print_r($irc_log);
+echo "<table>";
+echo "<tr><th></th><th></th><th></th></tr>";
+
+foreach ($messages as $line) {
+  $ts = $line[0];
+  $usr = $line[1];
+  $msg = $line[2];
+
+  echo "<tr><td>",$ts,"</td><td>",$usr,"</td><td>",$msg,"</td>";
+}
+
+echo "</table>";
 
 ?>
