@@ -1,13 +1,12 @@
- <?php
+<?php
 
 //path to logs
-$file_path='./logs/';
+$file_path='../logs/2016-07-25.log';
+//$file_path='./logs/channel/';
 //get file name from url
-$log_location = $_GET['l'];
+//$log_location = $_GET['l'];
 //combine path and url
-
-
-$log_file=file_get_contents($file_path.$log_location);
+$log_file=file_get_contents($file_path);
 
 //regex for capturing in channel status change (name changes or parts)
 $param1 = '/\\[(.*)\\] (\\*{3}) (.*)/';
@@ -31,23 +30,11 @@ unset($log_output3[0]);
 //print_r($log_output3);
 
 $timestamp = array_merge($log_output1[1], $log_output2[1], $log_output3[1]);
-$user = array_merge($log_output1[2], $log_output2[2], $log_output3[2]);
+$user = array_count_values(array_merge($log_output1[2], $log_output2[2], $log_output3[2]));
 $message = array_merge($log_output1[3], $log_output2[3], $log_output3[3]);
 
-$messages = array_map(null, $timestamp,$user,$message);
-
-echo "<table border=\"0\" id=\"log_table\">";
-echo "<tr><th>Timestamp</th><th>User</th><th>Message</th></tr>";
-
-foreach ($messages as $line) {
-  $ts = $line[0];
-  $usr = $line[1];
-  $msg = $line[2];
-    
-  echo "<tr><td>",$ts,"</td><td>",$usr,"</td><td>",$msg,"</td></tr>";
-
+foreach($user as $username => $line_count){
+  echo $username,": ",$line_count,"<br>";
 }
-
-echo "</table>";
 
 ?>
