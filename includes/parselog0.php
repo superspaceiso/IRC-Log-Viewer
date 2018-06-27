@@ -1,50 +1,61 @@
  <?php
 
-class ParseLog{
+class ParseLog {
 
-  //public $log_location = $_GET['l'];
-  public $file_path= '../logs/2016-07-25.log';
 
-  private $param1 = '/\\[(.*)\\] (\\*{3}) (.*)/';
-  private $param2 = '/\\[(.*)\] (\\*{1}) (.*)/';
-  private $param3 = '/\[(.*)\] <(.*?)> (.*)/';
+	//The constructor method runs once, each time the class is instanced.
+	private $file_data;
+	public function __construct($file_path=null){
 
-  public function OpenLog(){
-    return file_get_contents($this->file_path);
-  }
-  public function StatusChange(){
-    preg_match_all($this->param1, $this->OpenLog(), $log_output1, PREG_PATTERN_ORDER,$offset = 0);
-    unset($log_output1[0]);
-    return $log_output1;
-  }
-  public function UserAction(){
-    preg_match_all($this->param2, $this->OpenLog(), $log_output2, PREG_PATTERN_ORDER,$offset = 0);
-    unset($log_output2[0]);
-    return $log_output2;
-  }
-  public function UserMessage(){
-    preg_match_all($this->param3, $this->OpenLog(), $log_output3, PREG_PATTERN_ORDER,$offset = 0);
-    unset($log_output3[0]);
-    return $log_output3;
-  }
-  public function TimeStamp(){
-    return array_merge($this->StatusChange(), $this->UserAction(), $this->UserMessage());
-  }
-  public function Username(){
-    return array_merge($this->StatusChange(), $this->UserAction(), $this->UserMessage());
-  }
-  public function Message(){
-    return array_merge($this->TimeStamp(), $this->UserAction(), $this->UserMessage());
-  }
-  public function MergeLog(){
-    return array_map(null, $this->CombineTS(),$this->CombineUsr(),$this->CombineMsg());
-  }
+		//Backwards compatible argument validation for PHP versions below 7
+		if($file_path == null){throw new Exception('File path cannot be null');}
+
+		//Because the constructor runs only once, we should read the file and store the data now.
+		//This means we aren't re-reading the file from scratch everytime one of the methods below are called.
+		$this->file_data = file_get_contents($file_path);
+
+	}
+
+
+	public function searchData($pattern=null){
+		if($pattern == null){throw new Exception('Regex search pattern string cannot be null');}
+
+		preg_match_all($pattern, $this->file_data, $matches, PREG_PATTERN_ORDER, $offset = 0);
+		unset($matches[0]);
+
+		return $matches;
+	}
+
+
+	private function getStatus(){
+		return $this->searchData('/\\[(.*)\\] (\\*{3}) (.*)/');
+	}
+
+
+	private function getUserActions(){
+		return $this->searchData('/\\[(.*)\] (\\*{1}) (.*)/');
+	}
+
+
+	private function getUserMessages(){
+		return $this->searchData('/\[(.*)\] <(.*?)> (.*)/');
+	}
+
+
+	public function getLogs(){
+		$timestamp = array_merge($this->getStatus()[1], $this->getUserActions()[1], $this->getUserMessages()[1]);
+		$user = array_merge($this->getStatus()[2], $this->getUserActions()[2], $this->getUserMessages()[2]);
+		$message = array_merge($this->getStatus()[3], $this->getUserActions()[3], $this->getUserMessages()[3]);
+
+		return array_map(null, $timestamp,$user,$message);
+	}
+
 }
 
 
 
-$test = new ParseLog();
-print_r($test->Message());
+$test = new ParseLog('../logs/2016-07-25.log');
+var_dump($test->getLogs());
 
 //require 'parselog.view.php';
 
