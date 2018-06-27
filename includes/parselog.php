@@ -1,53 +1,57 @@
  <?php
 
-//path to logs
-$file_path='./logs/';
-//get file name from url
-$log_location = $_GET['l'];
-//combine path and url
+$location = $_GET['l'];
 
+class ParseLog {
 
-$log_file=file_get_contents($file_path.$log_location);
+	//The constructor method runs once, each time the class is instanced.
+	private $file_data;
+	public function __construct($file_location=null){
 
-//regex for capturing in channel status change (name changes or parts)
-$param1 = '/\\[(.*)\\] (\\*{3}) (.*)/';
-preg_match_all($param1, $log_file, $log_output1, PREG_PATTERN_ORDER,$offset = 0);
+		//Backwards compatible argument validation for PHP versions below 7
+		if($file_location == null){throw new Exception('File path cannot be null');}
 
-unset($log_output1[0]);
-//print_r($log_output1);
+    $file_path='./logs/';
+		//Because the constructor runs only once, we should read the file and store the data now.
+		//This means we aren't re-reading the file from scratch everytime one of the methods below are called.
+		$this->file_data = file_get_contents($file_path.$file_location);
 
-//regex for capturing user action (such as /me)
-$param2 = '/\\[(.*)\] (\\*{1}) (.*)/';
-preg_match_all($param2, $log_file, $log_output2, PREG_PATTERN_ORDER,$offset = 0);
+	}
 
-unset($log_output2[0]);
-//print_r($log_output2);
+	//Lets centralize where we are performing the regex, since the logic is the same each time and only the pattern changes
+	public function searchData($pattern=null){
+		if($pattern == null){throw new Exception('Regex search pattern string cannot be null');}
 
-//regex for capturing user message
-$param3 ='/\[(.*)\] <(.*?)> (.*)/';
-preg_match_all($param3, $log_file, $log_output3, PREG_PATTERN_ORDER,$offset = 0);
+		preg_match_all($pattern, $this->file_data, $matches, PREG_PATTERN_ORDER, $offset = 0);
+		unset($matches[0]);
 
-unset($log_output3[0]);
-//print_r($log_output3);
+		return $matches;
+	}
 
-$timestamp = array_merge($log_output1[1], $log_output2[1], $log_output3[1]);
-$user = array_merge($log_output1[2], $log_output2[2], $log_output3[2]);
-$message = array_merge($log_output1[3], $log_output2[3], $log_output3[3]);
+	private function getStatus(){
+		return $this->searchData('/\\[(.*)\\] (\\*{3}) (.*)/');
+	}
 
-$messages = array_map(null, $timestamp,$user,$message);
+	private function getUserActions(){
+		return $this->searchData('/\\[(.*)\] (\\*{1}) (.*)/');
+	}
 
-echo "<table border=\"0\" id=\"log_table\">";
-echo "<tr><th>Timestamp</th><th>User</th><th>Message</th></tr>";
+	private function getUserMessages(){
+		return $this->searchData('/\[(.*)\] <(.*?)> (.*)/');
+	}
 
-foreach ($messages as $line) {
-  $ts = $line[0];
-  $usr = $line[1];
-  $msg = $line[2];
-    
-  echo "<tr><td>",$ts,"</td><td>",$usr,"</td><td>",$msg,"</td></tr>";
+	public function getLogs(){
+		$timestamp = array_merge($this->getStatus()[1], $this->getUserActions()[1], $this->getUserMessages()[1]);
+		$user = array_merge($this->getStatus()[2], $this->getUserActions()[2], $this->getUserMessages()[2]);
+		$message = array_merge($this->getStatus()[3], $this->getUserActions()[3], $this->getUserMessages()[3]);
+
+		return array_map(null, $timestamp,$user,$message);
+	}
 
 }
 
-echo "</table>";
+$log = new ParseLog($location);
+
+require 'parselog.view.php';
 
 ?>

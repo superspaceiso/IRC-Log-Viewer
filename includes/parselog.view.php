@@ -4,7 +4,7 @@
     <th>User</th>
     <th>Message</th>
   </tr>
-<?php foreach ($messages as $line): ?>
+<?php foreach ($log->getLogs() as $line): ?>
   <tr>
     <td><?= $line[0] ?></td>
     <td><?= $line[1] ?></td>
