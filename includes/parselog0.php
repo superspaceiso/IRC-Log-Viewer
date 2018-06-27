@@ -17,6 +17,7 @@ class ParseLog {
 	}
 
 
+	//Lets centralize where we are performing the regex, since the logic is the same each time and only the pattern changes
 	public function searchData($pattern=null){
 		if($pattern == null){throw new Exception('Regex search pattern string cannot be null');}
 
