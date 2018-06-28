@@ -10,5 +10,5 @@
     <td><?= $line[1] ?></td>
     <td><?= $line[2] ?></td>
   </tr>
-<?php endforeach; ?>  
+<?php endforeach; ?>
 </table>
