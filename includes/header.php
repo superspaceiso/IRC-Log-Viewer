@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
 	<title>IRC Log Viewer</title>
-	<link rel="stylesheet" type="text/css" href="includes/stylesheet.css">
+	<link rel="stylesheet" type="text/css" href="./css/stylesheet.css">
 </head>
 
 <html>

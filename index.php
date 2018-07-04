@@ -2,7 +2,7 @@
 
 <div id="content">
 
-<?php include './includes/listlogs.php'?>
+<?php require './includes/listlogs.php'?>
 
 </div>
 

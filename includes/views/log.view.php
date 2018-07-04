@@ -4,7 +4,7 @@
     <th>User</th>
     <th>Message</th>
   </tr>
-<?php foreach ($log->getLogs() as $line): ?>
+<?php foreach ($log->mergeLogs() as $line): ?>
   <tr>
     <td><?= $line[0] ?></td>
     <td><?= $line[1] ?></td>

@@ -4,9 +4,9 @@ $location = $_GET['l'];
 
 class ParseLog
 {
-
     //The constructor method runs once, each time the class is instanced.
-    private $file_data;
+    protected $file_data;
+
     public function __construct($file_location=null)
     {
 
@@ -49,18 +49,29 @@ class ParseLog
         return $this->searchData('/\[(.*)\] <(.*?)> (.*)/');
     }
 
-    public function getLogs()
+    public function mergeTimeStamp()
     {
-        $timestamp = array_merge($this->getStatus()[1], $this->getUserActions()[1], $this->getUserMessages()[1]);
-        $user = array_merge($this->getStatus()[2], $this->getUserActions()[2], $this->getUserMessages()[2]);
-        $message = array_merge($this->getStatus()[3], $this->getUserActions()[3], $this->getUserMessages()[3]);
+        return array_merge($this->getStatus()[1], $this->getUserActions()[1], $this->getUserMessages()[1]);
+    }
 
-        return array_map(null, $timestamp, $user, $message);
+    public function mergeUser()
+    {
+        return array_merge($this->getStatus()[2], $this->getUserActions()[2], $this->getUserMessages()[2]);
+    }
+
+    public function mergeMessage()
+    {
+        return array_merge($this->getStatus()[3], $this->getUserActions()[3], $this->getUserMessages()[3]);
+    }
+
+    public function mergeLogs()
+    {
+        return array_map(null, $this->mergeTimeStamp(), $this->mergeUser(), $this->mergeMessage());
     }
 }
 
 $log = new ParseLog($location);
 
-require 'parselog.view.php';
+require './includes/views/log.view.php';
 
-?>
+require 'stats.php';
