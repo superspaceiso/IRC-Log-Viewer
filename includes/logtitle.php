@@ -21,4 +21,4 @@ class pageTitle
 
 $title = new pageTitle($url);
 
-echo "<h1>",$title->createTitle(),"</h1>";
+require './includes/views/title.view.php';
