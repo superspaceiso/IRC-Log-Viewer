@@ -15,10 +15,10 @@ class ParseLog
             throw new Exception('File path cannot be null');
         }
 
-        $file_path='./logs/';
+        //$file_path='./logs/';
         //Because the constructor runs only once, we should read the file and store the data now.
         //This means we aren't re-reading the file from scratch everytime one of the methods below are called.
-        $this->file_data = file_get_contents($file_path.$file_location);
+        $this->file_data = file_get_contents($file_location);
     }
 
     //Lets centralize where we are performing the regex, since the logic is the same each time and only the pattern changes
