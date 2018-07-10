@@ -2,7 +2,7 @@
 
 $url=$_SERVER['REQUEST_URI'];
 
-class pageTitle
+class PageTitle
 {
     private $mod_url;
     public function __construct($url=null)
@@ -14,11 +14,10 @@ class pageTitle
     }
     public function createTitle()
     {
-        $date = strtotime($this->mod_url[0]);
-        return date('d/m/Y', $date);
+        return date('d/m/Y', strtotime($this->mod_url[0]));
     }
 }
 
-$title = new pageTitle($url);
+$title = new PageTitle($url);
 
 require './includes/views/title.view.php';
