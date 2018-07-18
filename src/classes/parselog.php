@@ -1,7 +1,5 @@
  <?php
 
-$location = $_GET['l'];
-
 class ParseLog
 {
     //The constructor method runs once, each time the class is instanced.
@@ -70,8 +68,5 @@ class ParseLog
     }
 }
 
-$log = new ParseLog($location);
+//equire 'views/log.view.php';
 
-require './includes/views/log.view.php';
-
-require 'stats.php';

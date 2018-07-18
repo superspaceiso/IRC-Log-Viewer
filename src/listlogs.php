@@ -24,6 +24,8 @@ foreach($IteratorIterator as $path) {
 
       echo '<a href="./log.php?l=',  urlencode($files), '">';
       echo date('d/m/Y', strtotime($mod_log[0]));
+      echo "</a> | ";
+      echo '<a href="./stats.php?l=',  urlencode($files), '">Stats';
       echo "</a><br>";
     }
   }

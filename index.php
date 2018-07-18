@@ -1,9 +1,9 @@
-<?php include ('includes/header.php'); ?>
+<?php include ('src/includes/header.php'); ?>
 
 <div id="content">
 
-<?php require './includes/listlogs.php'?>
+<?php require './src/listlogs.php'?>
 
 </div>
 
-<?php include ('includes/footer.php'); ?>
+<?php include ('src/includes/footer.php'); ?>

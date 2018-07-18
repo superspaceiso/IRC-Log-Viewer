@@ -9,5 +9,5 @@
 <div id="page_container">
 
 <div id="page_nav">
-		<a href="index.php">Home</a>
+		<a href="./index.php">Home</a>
 </div>

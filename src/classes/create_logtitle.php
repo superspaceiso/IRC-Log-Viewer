@@ -1,7 +1,5 @@
 <?php
 
-$url=$_SERVER['REQUEST_URI'];
-
 class PageTitle
 {
     private $mod_url;
@@ -17,7 +15,3 @@ class PageTitle
         return date('d/m/Y', strtotime($this->mod_url[0]));
     }
 }
-
-$title = new PageTitle($url);
-
-require './includes/views/title.view.php';

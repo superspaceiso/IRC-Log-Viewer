@@ -18,8 +18,3 @@ class Stats extends ParseLog
         return array_slice($counted_words, 1, $array_length);
     }
 }
-
-$stats = new Stats($location);
-
-var_dump($stats->frequentUsers());
-var_dump($stats->frequentWords(10));
