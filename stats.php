@@ -14,5 +14,6 @@ $stats = new Stats($location);
 
 require 'src/views/title.view.php';
 
+require 'src/views/stats.view.php';
 
 require 'src/includes/footer.php';

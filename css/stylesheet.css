@@ -15,6 +15,13 @@ body{
 	width: 100%;
 }
 
+.stats_table{
+	width: 100%;
+}
+.stats_table th{
+	width: 50%;
+}
+
 #page_footer{
 	width: 100%;
 	background-color: black;
