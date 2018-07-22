@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <head>
+	<meta charset="UTF-8">
 	<title>IRC Log Viewer</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./css/stylesheet.css">
 </head>
 

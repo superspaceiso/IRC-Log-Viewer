@@ -4,7 +4,9 @@ class Stats extends ParseLog
 {
     public function frequentUsers()
     {
-        return array_count_values($this->mergeUser());
+      $frequent_users = array_count_values(array_diff($this->mergeUser(),['*','**','***']));
+      arsort($frequent_users);
+      return $frequent_users;
     }
 
     public function frequentWords($array_length)

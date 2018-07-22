@@ -1,18 +1,25 @@
 body{
-	font-family: Sans-Serif;
-	font-size: 12px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 10pt;
 	color: black;
-	line-height: 15px;
 	font-weight: bold;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
+
 
 #page_container{
 	width: 1024px;
 	margin: 0 auto;
 }
 
+#page_nav{
+	font-size: 20px;
+}
+
 #log_table{
 	width: 100%;
+	font-size: 8pt;
 }
 
 .stats_table{

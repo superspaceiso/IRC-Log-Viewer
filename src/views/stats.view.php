@@ -18,12 +18,12 @@
 <table border="0" class="stats_table">
   <tr>
     <th>User</th>
-    <th>Line Count</th>
+    <th>Word Count</th>
   </tr>
-<?php foreach ($stats->frequentWords(50) as $username => $line_count): ?>
+<?php foreach ($stats->frequentWords(50) as $username => $word_count): ?>
   <tr>
     <td><?= $username ?></td>
-    <td><?= $line_count ?></td>
+    <td><?= $word_count ?></td>
   </tr>
 <?php endforeach; ?>
 </table>

@@ -68,5 +68,3 @@ class ParseLog
     }
 }
 
-//equire 'views/log.view.php';
-
