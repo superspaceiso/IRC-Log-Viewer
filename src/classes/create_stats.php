@@ -2,6 +2,11 @@
 
 class Stats extends ParseLog
 {
+    public function __construct($location)
+    {
+        parent::__construct($location);
+    }
+    
     public function frequentUsers()
     {
       $frequent_users = array_count_values(array_diff($this->mergeUser(),['*','**','***']));
