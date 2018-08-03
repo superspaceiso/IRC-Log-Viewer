@@ -36,7 +36,7 @@ class Linecount extends ParseLog
         $linecount["23:00"] = count(array_filter($this->mergeTimeStamp(), array($this, 'hr23')));
         return $linecount;
     }
-    public function callbacks()
+    private function callbacks()
     {
         call_user_func(array($this, 'hr00'));
         call_user_func(array($this, 'hr01'));
@@ -63,11 +63,11 @@ class Linecount extends ParseLog
         call_user_func(array($this, 'hr22'));
         call_user_func(array($this, 'hr23'));
     }
-    public function hr00($array)
+    private function hr00($array)
     {
         return($array >= "00:00:00" and $array <= "00:59:59");
     }
-    public function hr01($array)
+    private function hr01($array)
     {
         return($array >= "01:00:00" and $array <= "01:59:59");
     }

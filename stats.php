@@ -3,16 +3,15 @@
 $location = $_GET['l'];
 $url = $_SERVER['REQUEST_URI'];
 
-require 'src/includes/header.php';
-require 'src/classes/create_logtitle.php';
-require 'src/classes/parselog.php';
-require 'src/classes/create_stats.php';
-require 'src/classes/linecount.php';
-
+spl_autoload_register(function ($class) {
+    include 'src/classes/' . $class . '.php';
+});
 
 $title = new PageTitle($url);
 $stats = new Stats($location);
 $linecount = new Linecount($location);
+
+require 'src/includes/header.php';
 
 require 'src/views/title.view.php';
 
